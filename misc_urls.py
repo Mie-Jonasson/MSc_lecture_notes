@@ -41,7 +41,7 @@ GROUP_URLS = [
     ],
     [
         "group f",
-        "<name>",
+        "if time > 16 {beer++;}",
         # Monitoring URL:
         "http://209.38.255.154:3000",
         # Logging URL:
