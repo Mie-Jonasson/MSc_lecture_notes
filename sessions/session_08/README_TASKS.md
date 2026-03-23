@@ -33,11 +33,32 @@ Check the user interface of another group's _ITU-MiniTwit_ application for funct
   * After publishing a message, does it appear on your private timeline?
   * Can you follow another user?
 
-In case you find non-functional/erroneous behavior please report it via issues to the respective GitHub repositories (find them in [`repositories.py`](https://github.com/itu-devops/BSc_lecture_notes/blob/master/repositories.py)).
+In case you find non-functional/erroneous behavior please report it via issues to the respective GitHub repositories (find them in [`repositories.py`](https://github.com/itu-devops/MSc_lecture_notes/blob/master/repositories.py)).
 
 **Do not** send requests to the simulator API of the other group. It is really only meant for the simulator (behave nicely towards the other group!). In case you want to make sure that non of the other groups sends requests to the simulator API of your group, you might want to only accept connections from the simulator server, which has the IP `104.248.134.203`.
 
-Please check the user interface of the group that is following you in alphabetical order in the [`repositories.py`](https://github.com/itu-devops/BSc_lecture_notes/blob/master/repositories.py) file. The last group checks group a. You will find the URL of the _ITU-MiniTwit_ application as being the first of the two given URLs in the aforementioned file. 
+Please find which group's user interface you are checking in the list below. Find your own group on the left-hand side and the name of the group your are checking behind the arrow. You will find the URL of the _ITU-MiniTwit_ application from the respective group in file [`repositories.py`](https://github.com/itu-devops/MSc_lecture_notes/blob/master/repositories.py) (first of the two given URLs).
 
 
+### Who checks whom?
+
+#### BSc
+
+Group a - Group b
+
+Group p - Group f
+
+Group d - Group e
+
+#### MSc
+
+Group g - Group m
+
+Group o - Group q
+
+Group l - Group n
+
+Group i - Group c
+
+Group k - Group j
 

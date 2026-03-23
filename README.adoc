@@ -119,7 +119,7 @@ link:https://github.com/itu-devops/MSc_lecture_notes/blob/master/sessions/sessio
 |12:00 - 16:00
 |Mircea
 |-
-|link:https://github.com/itu-devops/MSc_lecture_notes/blob/master/sessions/session_10/TLSTutorial.md[TLS Tutorial]
+|Workshop
 |
 |Continue isolation of components into services/containers/VMs and Fix reported problems
 // w16
