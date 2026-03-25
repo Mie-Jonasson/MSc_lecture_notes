@@ -23,11 +23,13 @@ How do we technically describe what happened? We say that
 > 
 It failed to serve users due to insufficient **scalability** under load.
 
-### Other stories? 
+### Other scalability stories
+- Ticketmaster being [down](https://www.educative.io/blog/taylor-swift-ticketmaster-meltdown) when 13million fans showed up to buy tickets instead of the predicted 1.5million
+- Twitter used to [show the fail whale a lot](https://medium.com/@yadavmpadiyar/scaling-up-1-twitter-from-fail-whale-to-real-time-global-scale-d4af68965a70) because of their Rails monolithic architecture was hard to scale. Went from 200-300 req/s per host (Ruby) to 10,000-20,000 (Java/Scala)
+
+### Other availability stories (misconfiguration / human error)
 - A [BGP misconfiguration](https://blog.cloudflare.com/october-2021-facebook-outage/) took down Facebook, Instagram, and WhatsApp for 6 hours. Engineers couldn't even enter buildings because ID systems were down too
 - An engineer accidentally [ran `rm -rf` on the production database](https://about.gitlab.com/blog/postmortem-of-database-outage-of-january-31/) during a maintenance operation. 5 out of 5 backup methods failed. They lost 6 hours of data
-- Ticketmaster being [down](https://www.educative.io/blog/taylor-swift-ticketmaster-meltdown) when 13million fans showed up to buy tickets instead of the predicted 1.5million 
-- Twitter used to [show the fail whale a lot](https://medium.com/@yadavmpadiyar/scaling-up-1-twitter-from-fail-whale-to-real-time-global-scale-d4af68965a70) because of their Rails monolithic architecture was hard to scale. Went from 200-300 req/s per host (Ruby) to 10,000-20,000 (Java/Scala)
 
 ## Introduction to Availability 
 
@@ -37,7 +39,9 @@ It failed to serve users due to insufficient **scalability** under load.
 - a **quality attribute**... 
 - that is expressed as the **proportion of time that a system or service is operational** and accessible for use. 
 
-e.g. 99.999% uptime, we call it "five nines"
+e.g. 99.999% uptime, we call it "five nines" 
+
+Every additional "nine" increases the expectations on your system uptime. 
 
 ![](assets/number-of-nines.png)
 
@@ -57,7 +61,7 @@ Source: https://x.com/ThePrimeagen/status/2036567606711251184
 ### How do systems fail to achieve availability? 
 
 
-#### When Individual Components Fail
+#### 1. When Individual Components Fail
 
 
 This is probably the architecture that many of your systems have at the moment. 
@@ -66,29 +70,21 @@ We say that such an architecture has a **single point of failure**. This can be 
 
 ![](images/possible_arch1.png)
 
-If Node 1 is down, then our whole system is down! 
-
-
-###### What if we use multiple machines in the above scenario? 
-
-This scenario has different containers run on different machines (V or not V ;). 
-
-![](images/possible_arch2.png)
-
-The scenario is not better from an availability POV. In fact, it might even be worse: we have even more **single points of failure** because each hardware node is one such possible point of failure. 
+If Node 1 is down, then our whole system is down!
 
 ---
 
 
-#### When Individual Components Are Overwhelmed
+#### 2. When Individual Components Are Overwhelmed
 
-My story with demoing Zeeguu to a room full of polyglots : 
+Personal story: demoing Zeeguu to a roomfull of polyglots.
 
 
+Scenario: 
 > > Your user authentication system is slow, and your application becomes really popular with many users trying to create accounts at the same time. **The server’s CPU becomes a bottleneck** hashing algorithms used by the application is computationally intensive, causing login delays, and users going away from the system. 
 
 
-We say that such an architecture has encountered a **congestion**, which is **reduced quality of service that occurs when a network node or link is attempting to handle more data than it can**,. 
+We say that such an architecture has encountered a **congestion**, which is **reduced quality of service that occurs when a network node or link is attempting to handle more data than it can**. 
 
 Possible Reasons for congestion 
 - Seasonal spikes in demand
@@ -98,47 +94,47 @@ Possible Reasons for congestion
 
 
 
-### How to achieve availability
+### How to increase availability
 
-#### Eliminating Single Points of Failure
-##### Life solves availability by replication
-
-We can learn from one of the most marvelous systems that we are aware of: the human body. 
-
-It is resilient at multiple levels of abstraction. We have two lungs, two kidneys, two eyes, etc. But much more than that: every cell has the whole DNA of the whole thing inside it! 
-
-![400](images/lung_redundancy.png)
-
-The solution nature found with respect to availability and removing single points of failure is: **redundancy.**
-
-*Possible side-rant: CS is always learning from biology. OO programming. Ant colony optimization. etc.*
-
-##### Redundancy in System Design
-
-Redundancy in system design is the solution to SPF.
+#### 1. Eliminating Single Points of Failure
 
 In system design **redundancy** means *adding extra components to the system in such a way that **if one component fails, another can take over**. 
 
-
-##### Tradeoffs of redundancy
-- **Cost** -- it is more expensive 
-- **Synchronization** -- keeping redundant components in sync can be challenging -- see your distributed systems course (CAP theorem)
-
-[Read More](https://csis.pace.edu/~marchese/CS865/Lectures/Chap8/New8/Chapter8.html) on redundancy.
+Redundancy in system design is the solution to the single point of failure problem.
 
 
+##### Cost and synchronization are the two tradeoffs that come with the increased availability of redundancy
+- **Cost** -- it is more expensive to duplicate nodes
+- **Synchronization** -- keeping redundant components in sync can be challenging -- see your distributed systems course and the CAP theorem (consistency, availability, partition: you can only have two)
 
-#### Preventing Congestion
 
-The first and most important solution is 
+##### Where did we get the inspiration from? 
 
-1. **Performance optimization:*** Ensuring that the system is designed and tuned to handle the expected load efficiently, reducing the risk of bottlenecks and failures.
+We can learn from one of the most marvelous systems that we are aware of: the human body. 
+
+It is resilient at multiple levels of abstraction. We have two lungs, two kidneys, two eyes, etc. 
+
+![400](images/lung_redundancy.png)
+
+And the ultimate replication: the DNA! Every cell has the whole DNA of the whole thing inside it! 
+
+
+The solution nature found with respect to availability and removing single points of failure is: **redundancy.**
+
+*Note: CS is always learning from biology. OO programming. Ant colony optimization. etc.*
+
+
+#### 2. Designing Systems to Prevent Congestion
+
+There are two main solutions to preventing congestion:
+
+##### **Performance optimization:*** Ensuring that the system is designed and tuned to handle the expected load efficiently, reducing the risk of bottlenecks and failures.
 
 E.g. 
 - DB Indexes 
 - Optimal data structures and algorithms
 
-**When everything else fails**, then we solve congestion with **Scaling**. 
+##### **When performance optimization is not enough**, we solve congestion with **scaling**. 
 
 There are two main approaches to scaling: 
 
@@ -488,8 +484,13 @@ There are two types of services
 
 Note that **most of the orchestration platforms** are **optimized** for you to have **stateless services** because they can be replicated easily.
 
-In your project you might have to handle this situation.
+### Move out of your container state the user session 
 
+In your project you will have to handle this situation.
+
+And you also very likely have to take out of the container the Latest ID - otherwise you can't track it correctly
+
+How to do this? 
 
 ## Tradeoffs of horizontal scaling
 
@@ -607,4 +608,7 @@ Example:
 
 Exercise: [**Swarm creation on DigitalOcean**](./README_EXERCISE.md).
 Practical: [**Scale your API**](README_TASKS.md) in preparation for the **future increase in user requests** ^^!!
+
+# References
+- [Redundancy in Distributed Systems](https://csis.pace.edu/~marchese/CS865/Lectures/Chap8/New8/Chapter8.html) — Tanenbaum's elaborate treatment of redundancy and fault tolerance
 
