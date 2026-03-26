@@ -24,7 +24,7 @@ How do we technically describe what happened? We say that
 It failed to serve users due to insufficient **scalability** under load.
 
 ### Other scalability stories
-- Ticketmaster being [down](https://www.educative.io/blog/taylor-swift-ticketmaster-meltdown) when 13million fans showed up to buy tickets instead of the predicted 1.5million
+- Ticketmaster being [down](https://www.educative.io/blog/taylor-swift-ticketmaster-meltdown) when 13million fans showed up to buy tickets instead of the expected 1.5million
 - Twitter used to [show the fail whale a lot](https://medium.com/@yadavmpadiyar/scaling-up-1-twitter-from-fail-whale-to-real-time-global-scale-d4af68965a70) because of their Rails monolithic architecture was hard to scale. Went from 200-300 req/s per host (Ruby) to 10,000-20,000 (Java/Scala)
 
 ### Other availability stories (misconfiguration / human error)
@@ -36,10 +36,18 @@ It failed to serve users due to insufficient **scalability** under load.
 ### What is availability? 
 
 **Availability** is 
-- a **quality attribute**... 
+- a quality attribute... 
 - that is expressed as the **proportion of time that a system or service is operational** and accessible for use. 
 
-e.g. 99.999% uptime, we call it "five nines" 
+High availability means that users can access the system without significant interruptions or downtime.
+
+![](assets/gh-platform-uptime.png)
+
+Source: https://x.com/ThePrimeagen/status/2036567606711251184
+
+### We measure availability with the *number of nines uptime* metric
+
+We measure with the "number of nines" metric. e.g., an uptime of 99.9% is called "three nines", and it means that in a given period, the system was up for 99.9% of the time. 
 
 Every additional "nine" increases the expectations on your system uptime. 
 
@@ -51,12 +59,6 @@ Every additional "nine" increases the expectations on your system uptime.
 - banks
 - online services and apps
 
-
-High availability means that users can access the system without significant interruptions or downtime.
-
-![](assets/gh-platform-uptime.png)
-
-Source: https://x.com/ThePrimeagen/status/2036567606711251184
 
 ### How do systems fail to achieve availability? 
 
@@ -263,9 +265,9 @@ Discussion: why REST is particularly nice for IaC
 
 ## Vertical scaling is not appropriate for high variability workloads, or some workloads that are too big
 
-- You have to adapt fast to varying workload (e.g. Amazon's Black Friday)
+- You have to adapt fast to varying workload (e.g. Black Friday for web shops, Ticketmaster when Taylor Swift concerts, etc.). 
 
-- Complicated to scale down (often)
+- When you also have to scale down; often more complicated than upscaling
 
 - When you can't afford downtime - it implies switching machines off and on (physical but also VM!)
 
@@ -277,14 +279,10 @@ Discussion: why REST is particularly nice for IaC
 		- SETI@Home
 
 
-## Case Studies
-
-- [Brief History of Scaling at LinkedIn](https://engineering.linkedin.com/architecture/brief-history-scaling-linkedin): *"An easy fix we did was classic vertical scaling ... While that bought some time, we needed to scale further"*
-
 
 # Horizontal Scaling
 
-= Addressing congestion by **increasing the number of computing nodes**. 
+= Preventing congestion by **increasing the number of computing nodes**.
 
 Two components:
 1. **adding more machines to a setup** and
@@ -293,27 +291,28 @@ Two components:
 ![420](images/scaling-graphic.png)
 
 
-*We take it for granted, but it was a very revolutionary idea two decades ago*
+## From bigger machines to more machines
 
-- [As of **2000** Google can not host all their DB on a single machine](https://www.linkedin.com/pulse/how-did-google-scale-untold-story-shrey-batra/?trk=articles_directory). 
+- [As of **2000** Google can not host all their DB on a single machine](https://www.linkedin.com/pulse/how-did-google-scale-untold-story-shrey-batra/?trk=articles_directory).
 - The only way that Google could keep up was by buying normal computers and wiring them together into a fleet
-- Because half the cost of these computers was considered junk—floppy drives, metal chassis—the company would order raw motherboards and hard drives and sandwich them together.
-- To survive, Google would have to unite its computers into a seamless, resilient whole
-- In **2004** they introduce the [MapReduce paper](papers/mapreduce-osdi04.pdf) to propose an architecture for distributing the DB and subsequent queries over an array of machines 
+- Because half the cost of these computers was considered junk—floppy drives, metal chassis—the company would order raw motherboards and hard drives and sandwich them together
+- In **2004** they introduce the [MapReduce paper](papers/mapreduce-osdi04.pdf) to propose an architecture for distributing the DB and subsequent queries over an array of machines
 
+*We take this for granted today, but it was a very revolutionary idea two decades ago*
 
-## Load-Balancing
+Distributing data and computation across machines solves the congestion problem. But it doesn't solve the single point of failure problem. For that, we need **replication**.
 
-Horizontal Scaling 101: The original. 
+## Replicating Services
 
-= **Distributing traffic to - and computation across multiple servers**
+Load Balancing = **Distributing traffic to — and computation across — multiple replicated servers**
 
 - Ensures no single server bears too much demand
 - Improves responsiveness
+- Adds redundancy: if one replica goes down, others can take over
 
 ![](images/load_balancing.png)
 
-Solves **scaling** and SPF at the application server level but... 
+Solves **scaling** and SPF at the application server level but...
 
 ... load balancer is still SPF ^^!
 
@@ -342,8 +341,8 @@ Where to read more about this setup
 
 ### Limitations of load balancing
 
-Load balancing distributes traffic, but it doesn't manage the nodes behind it. As the number of nodes grows, who...
-- ... spins up new containers when one crashes?
+Load balancing and replication solve traffic distribution and SPF, but they don't manage the fleet. As the number of nodes grows, who...
+- ... spins up new services when one crashes?
 - ... decides which node runs which service?
 - ... handles rolling out updates without downtime?
 - ... scales up or down based on demand?
@@ -368,8 +367,8 @@ Container orchestration tools...
 - We use it in this course because it's the simplest way to learn orchestration concepts
 
 #### **Kubernetes**
-  * The industry standard — [82% of container users run it in production](https://thedecipherist.com/articles/docker_swarm_vs_kubernetes/)
   * Originally developed at Google
+  * The industry standard — [82% of container users run it in production](https://thedecipherist.com/articles/docker_swarm_vs_kubernetes/)
   * Much more powerful, but significantly more complex ([see hacker news discussion](https://news.ycombinator.com/item?id=26271470))
 
 Others: OpenShift (Red Hat's enterprise Kubernetes), Nomad (HashiCorp), and [many more](https://devopscube.com/docker-container-clustering-tools/)
@@ -451,12 +450,11 @@ Good examples of global service? A **log shipper** or a **monitoring container**
 
 #### 4. Task
 
-*"A service is a description of a desired state, and a task does the work"*
-
 - The atomic scheduling unit of swarm
 - Carries **a container and the commands to run inside it**
 - Manager nodes assign tasks to worker nodes according to the number of replicas set in the service scale
 
+*"A service is a description of a desired state, **and a task does the work**"*
 
 
 #### 5. The Routing Mesh
@@ -491,15 +489,25 @@ Note that **most of the orchestration platforms** are **optimized** for you to h
 
 ### Making your services stateless
 
-In your project you will have to handle this situation. Common approaches:
+General principle: **a container should be disposable**. If you can kill it and spin up a new one without the user noticing, your state management is correct.
 
-1. **Stateless tokens (JWT)** — encode session data in the token itself. No server-side state needed. Simplest if your session data is small (user ID, role, expiry).
+
+#### Handling user sessions across replicas
+
+**The session problem**: If a user authenticates on one replica and their next request is routed to a different replica, their session is lost. The second replica has no idea they're logged in. This is the most common reason stateful services break under replication.
+
+Common approaches to solving this:
+
+1. **Stateless tokens (JWT)** — encode session data in the token itself. No server-side state needed. Signing key, is a config value shared across replicas. Simplest if your session data is small (user ID, role, expiry).
 2. **External session store** — move sessions to Redis, Memcached, or the database. Any replica can look up the session.
 3. **Sticky sessions** — the load balancer always routes the same user to the same replica. Works but if that replica dies, the session is lost.
 
-General principle: **a container should be disposable**. If you can kill it and spin up a new one without the user noticing, your state management is correct.
 
-Also: you very likely have to take the Latest ID out of the container too — otherwise you can't track it correctly across replicas. Solution: store it in the database.
+#### Specifically for your project: Handling the Latest ID
+
+You very likely have to take the Latest ID out of the container too — otherwise every containers sees a different value. 
+
+Solution: store it in the database.
 
 ## Tradeoffs of horizontal scaling
 
@@ -620,10 +628,11 @@ See: [The Difference Between Docker Compose And Docker Stack](https://vsupalov.c
 
 
 
-## You can go quite far and still not need orchestration
+## Scaling in practice: you can go quite far without orchestration
 
-- Thibault Duplessis on the architecture of Lichess
-- StackOverflow does not use horizontal scaling ([podcast](https://hanselminutes.com/847/engineering-stack-overflow-with-roberta-arcoverde), [tweet](images/StackOverflowInfraTweet.png))
+- [Brief History of Scaling at LinkedIn](https://engineering.linkedin.com/architecture/brief-history-scaling-linkedin): *"An easy fix we did was classic vertical scaling ... While that bought some time, we needed to scale further"*. Started vertical, had to go horizontal. 
+- Thibault Duplessis on the architecture of Lichess — no orchestration, still works.
+- StackOverflow does not use horizontal scaling ([podcast](https://hanselminutes.com/847/engineering-stack-overflow-with-roberta-arcoverde), [tweet](images/StackOverflowInfraTweet.png)). Still works.
 
 ![400](images/StackOverflowInfraTweet.png)
 

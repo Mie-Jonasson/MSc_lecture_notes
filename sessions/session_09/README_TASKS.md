@@ -1,5 +1,5 @@
 
-# Your turn now: Scale and Increase Availability of Your Infra!
+# Your turn now: increase the availability of your application!
 
 
 ## 1) Add Scaling to Your Projects
@@ -17,8 +17,16 @@ Or:
 
 Implement an automatic update strategy in your build chain. Choose either rolling updates or blue-green. 
 
-## 3) Add a Availability View to your Monitoring Dashboard
-- Update your Dashboard to also show at least a graph with uptime over the last week, last month, and from this moment on
+## 3) Add an Availability View to your Monitoring Dashboard
+
+Add at least the following to your Grafana dashboard:
+- **HTTP success rate** — percentage of non-5xx responses over time
+- **Response time** — P95 latency (the response time that 95% of requests are faster than) for at least your key API endpoints (e.g., the simulator endpoints)
+- **Service health** — is each service up or down (based on a health check endpoint)
+
+Show these over the last week and last month.
+
+Bonus: set up an **alert** (e.g., in Grafana or via a Slack webhook) that notifies you when availability drops below a threshold.
 
 
 
