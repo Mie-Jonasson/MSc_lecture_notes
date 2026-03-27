@@ -664,7 +664,7 @@ See: [The Difference Between Docker Compose And Docker Stack](https://vsupalov.c
 # What Next?
 
 Exercise: [**Swarm creation on DigitalOcean**](./README_EXERCISE.md).
-Practical: [**Scale your API**](README_TASKS.md) in preparation for the **future increase in user requests** ^^!!
+Practical: [**Increase the scalability and availability of your API**](README_TASKS.md) in preparation for the **future increase in user requests** ^^!!
 
 # References
 - [Redundancy in Distributed Systems](https://csis.pace.edu/~marchese/CS865/Lectures/Chap8/New8/Chapter8.html) — Tanenbaum's elaborate treatment of redundancy and fault tolerance
