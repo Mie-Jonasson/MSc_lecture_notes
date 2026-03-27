@@ -5,29 +5,29 @@ GROUP_URLS = [
         # Monitoring URL:
         "https://zerodt.live/grafana/",
         # Logging URL:
-        "<logging_url>",
+        "https://zerodt.live/grafana/",
     ],
     [
         "group b",
-        "<name>",
+        "catch(RuntimeException){goto f;}",
         # Monitoring URL:
-        "<monitoring_url>",
+        "http://164.92.186.201:5001/grafana",
         # Logging URL:
         "<logging_url>",
     ],
     [
         "group c",
-        "<name>",
+        "group c",
         # Monitoring URL:
-        "<monitoring_url>",
+        "161.35.68.148:3000",
         # Logging URL:
         "<logging_url>",
     ],
     [
         "group d",
-        "<name>",
+        "Dense Dino Nuggets",
         # Monitoring URL:
-        "<monitoring_url>",
+        "http://64.226.82.73:3000",
         # Logging URL:
         "<logging_url>",
     ],
@@ -35,7 +35,7 @@ GROUP_URLS = [
         "group e",
         "Group E Dashboard Minitwit",
         # Monitoring URL:
-        "http://209.38.209.29:3000/public-dashboards/c13660544ba1472688314005db4ba3cc",
+        "http://209.38.209.29:3000/dashboards",
         # Logging URL:
         "<logging_url>",
     ],
@@ -65,9 +65,9 @@ GROUP_URLS = [
     ],
     [
         "group i",
-        "<name>",
+        "I Terroni",
         # Monitoring URL:
-        "<monitoring_url>",
+        "http://164.92.231.30:3000/",
         # Logging URL:
         "<logging_url>",
     ],
@@ -81,9 +81,9 @@ GROUP_URLS = [
     ],
     [
         "group k",
-        "<name>",
+        "Pat Myaz",
         # Monitoring URL:
-        "<monitoring_url>",
+        "http://209.38.114.224:3000/dashboards",
         # Logging URL:
         "<logging_url>",
     ],
@@ -115,7 +115,7 @@ GROUP_URLS = [
         "group n",
         "<name>",
         # Monitoring URL:
-        "<monitoring_url>",
+        "http://168.119.126.80:3001/public-dashboards/0815730723d84ddc8ce543f765e51bc6",
         # Logging URL:
         "<logging_url>",
     ],
@@ -123,9 +123,9 @@ GROUP_URLS = [
         "group o",
         "Rollback and relax",
         # Monitoring URL:
-        "http://ec2-13-51-198-31.eu-north-1.compute.amazonaws.com:3001/dashboards",
+        "http://ec2-13-60-32-149.eu-north-1.compute.amazonaws.com:3001/dashboards",
         # Logging URL:
-        "<logging_url>",
+        "http://ec2-13-60-32-149.eu-north-1.compute.amazonaws.com:3001/d/ad2jj8r/minitwit-logs-dashboard?orgId=1&from=now-6h&to=now&timezone=browser",
     ],
     [
         "group p",

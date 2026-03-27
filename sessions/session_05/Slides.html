@@ -167,6 +167,8 @@ https://addresstheelephant.io/docs/intro/
 
 ### Question: Confusion about continuous delivery vs. continuous deployment
 
+  > A CI (**continuous integration**) system clones the codebase for the software under consideration from a source control system such as GitHub, builds the software into an artifact that can be a binary, a tar archive, or a Docker image, and, very importantly, also runs unit and/or integration tests for the software.
+  >
   > A CD (**continuous deployment**) system deploys the artifacts built by the CI system to a target environment. This deployment can be automated for non-production environments, but usually includes a manual approval step for production.
   >
   > A more advanced type of such systems is a **continuous delivery**, platform which automates the deployment step to production and is capable of rolling back the deployment based on metrics obtained from monitoring and logging platforms.
@@ -175,9 +177,11 @@ https://addresstheelephant.io/docs/intro/
 
 ⚡️⚡️⚡️
 
-  > **Continuous delivery** is a software development practice where developers build software to release it into production anytime. To accomplish this, a constant delivery model involves production-like test environments.
+When I google the two definitions, I encounter a lot of sources that define the two the other way around, stating that continuous deployment is an extension of continuous delivery ...
+
+  > Continuous delivery is a software development practice where developers build software to release it into production anytime. To accomplish this, a constant delivery model involves production-like test environments.
   >
-  > **Continuous deployment** takes automation a step further and removes the need for manual intervention. The automated tests and developers are considered trustworthy enough that they don’t require approval for production release. If the tests pass, the new code is considered approved, and the deployment to production happens automatically.
+  > Continuous deployment takes automation a step further and removes the need for manual intervention. The automated tests and developers are considered trustworthy enough that they don’t require approval for production release. If the tests pass, the new code is considered approved, and the deployment to production happens automatically.
   >
   > https://www.ibm.com/think/topics/continuous-deployment#498277086
 
