@@ -80,8 +80,8 @@ GROUP_REPOS = [
         "group o",
         "Rollback & Relax",
         ["https://github.com/alqeren1/devops"],
-        "http://167.172.111.97:3000",
-        "http://167.172.111.97:5001",
+        "https://rollbackandrelax.dk",
+        "https://api.rollbackandrelax.dk",
     ],
     [
         "group p",

@@ -123,9 +123,9 @@ GROUP_URLS = [
         "group o",
         "Rollback and relax",
         # Monitoring URL:
-        "http://167.172.111.97:3001/dashboards",
+        "https://grafana.rollbackandrelax.dk/dashboards",
         # Logging URL:
-        "http://167.172.111.97:3001/d/ad2jj8r/minitwit-logs-dashboard?orgId=1&from=now-6h&to=now&timezone=browser",
+        "https://grafana.rollbackandrelax.dk/dashboards",
     ],
     [
         "group p",
