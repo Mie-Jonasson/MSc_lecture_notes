@@ -12,7 +12,11 @@ Do _either_ of the following:
 Or: 
 
   2. Create a Docker Swarm cluster for your _ITU-MiniTwit_ applications in which various components run as services and can be scaled as needed. Note, very likely you do not want to scale you DB servers horizontally (to keep your data consistent) but only all the services 'in front' of it.
-  
+
+## 1.b) (Optional) Measure your downtime when migrating to the swarm
+- How much time is your system down? Stopwatch measurement is fine. Ideally zero downtime should be achievable if you don't have to move your database. 
+- A brief description (half a page to one page) of how you ensured a low downtime during this transition should be part of your final report 
+
 ## 2) Update Strategy
 
 Implement an automatic update strategy in your build chain. Choose either rolling updates or blue-green. 

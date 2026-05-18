@@ -254,14 +254,6 @@ Adapted from https://www.kartar.net/posts/a-monitoring-maturity-model.markdown/
 
 ---
 
-### Monitoring Framework
-
-<img src="images/monitoring_framework.png" width="60%">
-
-From James Turnbull [_"The Art of Monitoring"_](https://artofmonitoring.com/)
-
----
-
 ### Pull versus Push Monitoring
 
   * Most monitoring systems are pull/polling-based:
@@ -529,6 +521,14 @@ $ du -h
 See chapters 9 and 10 in Mike Julian _"Practical Monitoring"_. I skip them here as they are likely part of the security class and out of scope of this class.
 
 Likely, once Mircea talks to you about security, you might want enhance you monitoring setup including some security concerns.
+
+---
+
+### Monitoring Framework
+
+<img src="images/monitoring_framework.png" width="60%">
+
+From James Turnbull [_"The Art of Monitoring"_](https://artofmonitoring.com/)
 
 ---
 

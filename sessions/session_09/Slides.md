@@ -379,6 +379,9 @@ Container orchestration tools...
 - We use it in this course because it's the simplest way to learn orchestration concepts
 
 #### **Kubernetes**
+
+![](images/kubernetes-not-stressful.png)
+
   * Originally developed at Google
   * The industry standard — [82% of container users run it in production](https://thedecipherist.com/articles/docker_swarm_vs_kubernetes/)
   * Much more powerful, but significantly more complex ([see hacker news discussion](https://news.ycombinator.com/item?id=26271470))
@@ -647,7 +650,7 @@ See: [The Difference Between Docker Compose And Docker Stack](https://vsupalov.c
 
 # What Next?
 
-Exercise: [**Swarm creation on DigitalOcean**](./README_EXERCISE.md).
+Exercise: [**Swarm creation on DigitalOcean**](./README_EXERCISE.md) or even better, the [version that Patrick created for you that includes the docker stack spec](https://github.com/itu-devops/itu-minitwit-docker-swarm). 
 Practical: [**Scale your API**](README_TASKS.md) in preparation for the **future increase in user requests** ^^!!
 
 # References

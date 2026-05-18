@@ -33,7 +33,7 @@ from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.firefox.options import Options
 
 
-GUI_URL = "http://localhost:5000/register"
+GUI_URL = "http://localhost:5001/register"
 DB_URL = "mongodb://localhost:27017/test"
 
 

@@ -21,7 +21,7 @@ GROUP_URLS = [
         # Monitoring URL:
         "161.35.68.148:3000",
         # Logging URL:
-        "<logging_url>",
+        "http://161.35.68.148:3000/d/38f35159-ba68-4157-b0dd-bcd053bafabd/http-logs-for-web-application?orgId=1&from=now-1h&to=now&timezone=browser",
     ],
     [
         "group d",
@@ -35,9 +35,9 @@ GROUP_URLS = [
         "group e",
         "Group E Dashboard Minitwit",
         # Monitoring URL:
-        "http://209.38.209.29:3000/dashboards",
+        "https://minitwit-devops.tech/grafana",
         # Logging URL:
-        "<logging_url>",
+        "https://minitwit-devops.tech/grafana",
     ],
     [
         "group f",
@@ -115,7 +115,7 @@ GROUP_URLS = [
         "group n",
         "<name>",
         # Monitoring URL:
-        "http://168.119.126.80:3001/public-dashboards/0815730723d84ddc8ce543f765e51bc6",
+        "http://91.99.213.62:3001/public-dashboards/d260d937ad1048b2a343ef3a1c25d3e5",
         # Logging URL:
         "<logging_url>",
     ],
@@ -123,16 +123,24 @@ GROUP_URLS = [
         "group o",
         "Rollback and relax",
         # Monitoring URL:
-        "http://ec2-13-60-32-149.eu-north-1.compute.amazonaws.com:3001/dashboards",
+        "https://grafana.rollbackandrelax.dk/dashboards",
         # Logging URL:
-        "http://ec2-13-60-32-149.eu-north-1.compute.amazonaws.com:3001/d/ad2jj8r/minitwit-logs-dashboard?orgId=1&from=now-6h&to=now&timezone=browser",
+        "https://grafana.rollbackandrelax.dk/dashboards",
     ],
     [
         "group p",
         "EastTOps",
         # Monitoring URL:
-        "http://164.90.229.101:3000/dashboards",
+        "https://itu-minitwit.me/grafana/dashboards",
         # Logging URL:
-        "<logging_url>",
+        "https://itu-minitwit.me/grafana/d/he869gg/logs?orgId=1&from=now-15m&to=now&timezone=browser",
+    ],
+     [
+        "group q",
+        "DevTroopers",
+        # Monitoring URL:
+        "https://grafana.devtroopersminitwit.codes/",
+        # Logging URL:
+        "https://grafana.devtroopersminitwit.codes/",
     ]
 ]
