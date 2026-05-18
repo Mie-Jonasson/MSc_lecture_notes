@@ -31,9 +31,9 @@ REPORT_URLS = [
     ],
     [
         "group f",
-        "<name>",
+        "if time > 16 {beer++;}",
         # Report Release URL:
-        "https://github.com/<gh_id>/<proj_id>/archive/refs/tags/<version_tag>.zip",
+        "https://github.com/TienCamLy/MiniTwit/archive/refs/tags/9.0.0.zip",
     ],
     [
         "group g",
